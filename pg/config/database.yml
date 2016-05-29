@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: FTS_Samples_development
+  username: postgres
+  password: 123
+
+test:
+  <<: *default
+  database: FTS_Samples_test
+
+production:
+  <<: *default
+  database: FTS_Samples_production
+  username: FTS_Samples
+  password: <%= ENV['FTS_SAMPLES_DATABASE_PASSWORD'] %>

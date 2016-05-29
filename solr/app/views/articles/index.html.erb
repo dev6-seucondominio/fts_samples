@@ -1,0 +1,24 @@
+<h1>Articles (Solr)</h1>
+
+<%= form_tag articles_path, method: :get do %>
+  <p>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Search", name: nil %>
+  </p>
+<% end %>
+
+<div id="articles">
+  <% @articles.each do |article| %>
+  <h2>
+    <span><%= article.name %></span>
+    <span class="comments">(<%= pluralize(article.comments.size, 'comment') %>)</span>
+  </h2>
+  <div class="info">
+    by <%= article.author.name %>
+    on <%= article.published_at.strftime('%b %d, %Y') %>
+  </div>
+  <div class="content"><%= article.content %></div>
+  <% end %>
+</div>
+
+<%= will_paginate @articles %>
